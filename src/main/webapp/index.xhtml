@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+<head>
+    <title>Produtos</title>
+</head>
+<body>
+    <h1>Cadastro de Produtos</h1>
+<form>
+    <div>
+        <label for="descricao">Descrição:</label>
+        <input id="descricao" name="descricao" placeholder="Descrição" maxlength="50" type="text"/> 
+    </div>
+    <div>
+        <label for="validade">Data de Validade:</label>
+        <input id="validade" name="validade" placeholder="dd/MM/aaaa" type="date"/>    
+    </div>
+    <div>
+        <label for="cadastro">Data de Cadastro:</label>
+        <input id="cadastro" name="cadastro" placeholder="dd/MM/aaaa" type="date"/>    
+    </div>
+    <div>
+        <label for="preco">Preço:</label>
+        <input id="preco" name="preco" placeholder="R$ 000" type="number"/>   
+    </div>
+    <div>
+        <label for="ativo">Ativo:</label>
+        <input id="ativo" name="ativo" type="checkbox"/>    
+    </div>
+    <div>
+        <button type="button" onclick="enviar()">Gravar</button>
+    </div>
+</form>
+
+</body>
+<script>
+function limpar(){
+    document.getElementById("descricao").value = "";
+    document.getElementById("validade").value = "";
+    document.getElementById("cadastro").value = "";
+    document.getElementById("preco").value = "";
+    document.getElementById("ativo").checked = false;
+};
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function enviar() {
+    var descricao = $('#descricao').val();
+    var validade = $('#validade').val();
+    var cadastro = $('#cadastro').val();
+    var preco = $('#preco').val();
+    var ativo = $('#ativo').is(':checked');
+    
+    $.ajax({
+        url: 'http://localhost:8080/DesafioJava/api/produtos',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            descricao: descricao,
+            validade: validade,
+            cadastro: cadastro,
+            preco: preco,
+            ativo: ativo
+        }),
+        success: function(data) {
+            alert('Produto cadastrado com sucesso!');
+            $('form')[0].reset();
+        },
+        error: function(xhr, status, error) {
+            alert('Erro ao cadastrar produto: ' + xhr.responseText);
+        }
+    });
+}
+</script>
+
+</html>

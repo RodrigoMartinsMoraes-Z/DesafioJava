@@ -1,5 +1,6 @@
 package Produto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,32 +9,31 @@ import java.util.Date;
 
 @Entity
 public class ProdutoEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String Nome;
-    
-    private String Descricao;
-    
-    private Date Cadastro;
-    
-    private Double Preco;
+	@Column(nullable = false)
+	private String Descricao;
 
-    public Long getId() {
-        return id;
-    }
+	@Column(nullable = false)
+	private Date Cadastro;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	@Column(nullable = false)
+	private Date Validade;
 
-	public String getNome() {
-		return Nome;
+	@Column(nullable = false)
+	private Double Preco;
+
+	@Column(nullable = false)
+	private boolean Ativo;
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setNome(String nome) {
-		Nome = nome;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getDescricao() {
@@ -58,6 +58,22 @@ public class ProdutoEntity {
 
 	public void setPreco(Double preco) {
 		Preco = preco;
+	}
+
+	public Date getValidade() {
+		return Validade;
+	}
+
+	public void setValidade(Date validade) {
+		Validade = validade;
+	}
+
+	public boolean isAtivo() {
+		return Ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		Ativo = ativo;
 	}
 
 }
