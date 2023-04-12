@@ -1,0 +1,4 @@
+Produto\ProdutoService.class
+Produto\ProdutoController.class
+Produto\IProdutoRepository.class
+Produto\ProdutoEntity.class
